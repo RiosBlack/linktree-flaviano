@@ -1,0 +1,18 @@
+---
+import WhatsappIcon from './WhatsappIcon.astro';
+import { salesLink } from '../_data/site';
+---
+
+{
+  salesLink ? (
+    <a class="float-button" href={salesLink} target="_blank" rel="noopener noreferrer" aria-label="Compre pelo WhatsApp">
+      <WhatsappIcon />
+      <span class="ping" aria-hidden="true" />
+    </a>
+  ) : (
+    <div class="float-button" aria-hidden="true">
+      <WhatsappIcon />
+      <span class="ping" aria-hidden="true" />
+    </div>
+  )
+}

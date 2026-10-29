@@ -1,0 +1,43 @@
+---
+import Base from '../_layouts/Base.astro';
+import GeoBackground from '../_components/GeoBackground.astro';
+import FloatingWhatsapp from '../_components/FloatingWhatsapp.astro';
+import ImageSlot from '../_components/ImageSlot.astro';
+import ActionLinks from '../_components/ActionLinks.astro';
+import StoreList from '../_components/StoreList.astro';
+import { findPublicImage } from '../_data/images';
+import { site } from '../_data/site';
+
+const banner = findPublicImage('banner');
+const year = new Date().getFullYear();
+---
+
+<Base title={site.name} description={site.description} image={banner}>
+  <main class="page">
+    <GeoBackground />
+    <FloatingWhatsapp />
+    <div class="shell">
+      <h1 class="sr-only">{site.name}</h1>
+      <header class="banner-frame">
+        <ImageSlot
+          name="banner"
+          alt={site.bannerAlt}
+          label="Banner"
+          hint="Salve o arquivo em public/images/banner.png"
+          priority
+        />
+        <div class="scan-line" aria-hidden="true"></div>
+      </header>
+      <p class="headline">{site.headline}</p>
+      <ActionLinks />
+      <StoreList />
+      <p class="note">{site.promoNote}</p>
+      <footer class="footer">
+        <p class="legal-name">{site.legalName}</p>
+        <p>{site.cnpj}</p>
+        <p class="coverage">{site.coverage}</p>
+        <p class="copy">© {year} {site.name} · Todos os direitos reservados</p>
+      </footer>
+    </div>
+  </main>
+</Base>
