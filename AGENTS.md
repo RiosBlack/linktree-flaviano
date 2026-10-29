@@ -69,3 +69,5 @@ Edite `src/_data/site.ts`.
 - [2026-10-29 — página de link da bio](changelogs/2026-10-29-pagina-link-bio.md)
 - [2026-10-29 — remoção da imagem de promoção](changelogs/2026-10-29-remover-imagem-promocao.md)
 - [2026-10-29 — links de WhatsApp e stories](changelogs/2026-10-29-links-whatsapp-stories.md)
+- [2026-10-29 — CNPJ e endereços das lojas](changelogs/2026-10-29-cnpj-enderecos-lojas.md)
+- [2026-10-29 — brasões das cidades](changelogs/2026-10-29-brasoes-cidades.md)
