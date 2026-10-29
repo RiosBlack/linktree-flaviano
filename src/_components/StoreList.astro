@@ -1,5 +1,10 @@
 ---
-import { site } from '../_data/site';
+import { site, stores } from '../_data/site';
+
+const external = {
+  target: '_blank',
+  rel: 'noopener noreferrer',
+};
 ---
 
 <section class="stores" aria-labelledby="stores-title">
@@ -10,16 +15,28 @@ import { site } from '../_data/site';
   </div>
   <div class="store-list">
     {
-      site.stores.map((store) => (
-        <article class="store">
-          <img class="crest" src={store.crest} alt={store.crestAlt} width="64" height="64" />
-          <span class="store-copy">
-            <span class="store-title">{store.title}</span>
-            <span class="store-address">{store.address}</span>
-            {store.cep && <span class="store-cep">CEP: {store.cep}</span>}
-          </span>
-        </article>
-      ))
+      stores.map((store) =>
+        store.mapsLink ? (
+          <a class="store" href={store.mapsLink} {...external}>
+            <img class="crest" src={store.crest} alt={store.crestAlt} width="64" height="64" />
+            <span class="store-copy">
+              <span class="store-title">{store.title}</span>
+              <span class="store-address">{store.address}</span>
+              {store.cep && <span class="store-cep">CEP: {store.cep}</span>}
+            </span>
+            <span class="sr-only">Abre no Google Maps</span>
+          </a>
+        ) : (
+          <article class="store">
+            <img class="crest" src={store.crest} alt={store.crestAlt} width="64" height="64" />
+            <span class="store-copy">
+              <span class="store-title">{store.title}</span>
+              <span class="store-address">{store.address}</span>
+              {store.cep && <span class="store-cep">CEP: {store.cep}</span>}
+            </span>
+          </article>
+        ),
+      )
     }
   </div>
 </section>

@@ -1,6 +1,7 @@
 export type Store = {
   title: string;
   address: string;
+  city: string;
   cep?: string;
   crest: string;
   crestAlt: string;
@@ -25,30 +26,35 @@ export const site = {
     {
       title: "Loja Valente",
       address: "Rua Landulfo Alvez, 114, Centro",
+      city: "Valente, BA",
       crest: "/images/brasoes/valente.png",
       crestAlt: "Brasão de Valente",
     },
     {
       title: "Loja Retiro",
       address: "Praça 27 de julho, 279, Centro",
+      city: "Retirolândia, BA",
       crest: "/images/brasoes/retirolandia.png",
       crestAlt: "Brasão de Retirolândia",
     },
     {
       title: "Loja Santa Luz 1",
       address: "Rua Gastão Pedreira, 80, Centro",
+      city: "Santaluz, BA",
       crest: "/images/brasoes/santaluz.png",
       crestAlt: "Brasão de Santaluz",
     },
     {
       title: "Loja Santaluz 2",
       address: "Rua Ítalo Antônio de Jesus Almeida, nº 173, Centro",
+      city: "Santaluz, BA",
       crest: "/images/brasoes/santaluz.png",
       crestAlt: "Brasão de Santaluz",
     },
     {
       title: "Loja São Domingos",
       address: "Praça Izaque Pinheiro da Costa, 29, Centro",
+      city: "São Domingos, BA",
       crest: "/images/brasoes/sao-domingos.png",
       crestAlt: "Brasão de São Domingos",
     },
@@ -56,6 +62,7 @@ export const site = {
       title: "Loja Santo Antônio",
       address:
         "Rua José Neves Oliveira, Distrito Santo Antônio - São Domingos BA",
+      city: "São Domingos, BA",
       crest: "/images/brasoes/sao-domingos.png",
       crestAlt: "Brasão de São Domingos",
     },
@@ -126,6 +133,21 @@ export function createInstagramStoriesLink(value: string): string | null {
   }
 }
 
+export function createGoogleMapsLink(query: string): string | null {
+  const trimmed = query.trim().replace(/\s+/g, " ");
+  if (!trimmed || trimmed.length > 240 || /[\u0000-\u001f<>]/.test(trimmed))
+    return null;
+
+  const url = new URL("/maps/search/", "https://www.google.com");
+  url.searchParams.set("api", "1");
+  url.searchParams.set("query", trimmed);
+  return url.toString();
+}
+
 export const salesLink = createWhatsappLink(site.whatsappUrl);
 export const supportLink = createWhatsappLink(site.whatsappUrl);
 export const offersLink = createInstagramStoriesLink(site.instagramProfileUrl);
+export const stores = site.stores.map((store) => ({
+  ...store,
+  mapsLink: createGoogleMapsLink(`${store.address}, ${store.city}`),
+}));
